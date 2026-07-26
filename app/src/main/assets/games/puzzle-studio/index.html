@@ -1,0 +1,15 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>Puzzle Odyssey</title><link rel="stylesheet" href="styles.css"></head><body>
+<main id="app">
+  <header><button id="exit">عودة</button><div class="brand"><i>PZ</i><div><b>PUZZLE ODYSSEY</b><span>عشرون عالماً · تحديات متدرجة · 1–2 لاعبين</span></div></div><div class="stars">★ <b id="totalStars">0</b>/60</div></header>
+  <section id="menu" class="screen active">
+    <div class="menu-title"><div><small>اختر اللوحة</small><h1>رحلة الألغاز المصوّرة</h1></div><div class="mode-picker"><button class="mode active" data-mode="solo">لاعب واحد</button><button class="mode" data-mode="duel">تحدّي لاعبين</button></div></div>
+    <div id="levels" class="levels"></div>
+    <footer>الأسهم + Space للاعب 1 · WASD + F للاعب 2 · يمكن اللعب باللمس</footer>
+  </section>
+  <section id="play" class="screen">
+    <div class="play-top"><div><small id="levelNumber">المستوى 1</small><h2 id="levelTitle">—</h2></div><div class="metrics"><span>الوقت <b id="time">00:00</b></span><span>الهدف <b id="target">—</b></span></div><div class="play-actions"><button id="preview">👁 معاينة</button><button id="hint">💡 مساعدة</button><button id="restart">↻ إعادة</button><button id="menuButton">القائمة</button></div></div>
+    <div id="arena" class="arena"></div>
+    <div id="previewCard" class="preview-card"><img id="previewImage" alt="معاينة"><span>احفظ التفاصيل ثم أكمل!</span></div>
+  </section>
+  <section id="result" class="screen result"><div class="result-card"><small>PUZZLE COMPLETE</small><h1 id="resultTitle">أحسنت!</h1><div id="resultStars" class="result-stars">★★★</div><p id="resultText"></p><div class="result-actions"><button id="next" class="primary">المستوى التالي</button><button id="again">إعادة اللعب</button><button id="resultMenu">قائمة اللوحات</button></div></div></section>
+</main><script src="game.js"></script></body></html>

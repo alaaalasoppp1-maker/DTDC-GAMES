@@ -1,0 +1,19 @@
+{
+  "id": "skyline-rush-neon-couriers",
+  "name": "Skyline Rush — Neon Couriers",
+  "version": "0.1.0-web-trial",
+  "entry": "index.html",
+  "offline": true,
+  "standalone": true,
+  "preferredOrientation": "landscape",
+  "engine": "Canvas2D",
+  "defaultQuality": "light",
+  "players": { "minimum": 1, "maximum": 2, "localMultiplayer": true, "multiplayerStyle": "shared-screen competitive chase" },
+  "campaign": { "routes": 6, "persistentUnlocks": true, "difficultyScaling": true },
+  "controls": {
+    "move": ["GamepadLeftStick", "GamepadDPad", "Arrows", "WASD", "Pointer", "Touch"],
+    "boost": ["GamepadA", "GamepadY", "GamepadRB", "GamepadRT", "Space", "Enter", "KeyF", "Touch"],
+    "pulse": ["GamepadB", "GamepadX", "GamepadLB", "GamepadLT", "Shift", "KeyG", "Touch"]
+  },
+  "exitContract": { "androidBridge": "DTDCGameBridge.exitGame(JSON_RESULT)", "postMessageType": "DTDC_GAME_EXIT", "domEvent": "dtdc-game-exit" }
+}

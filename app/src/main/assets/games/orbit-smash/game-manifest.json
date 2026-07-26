@@ -1,0 +1,31 @@
+{
+  "id": "orbit-smash-gravity-siege",
+  "name": "Orbit Smash — Gravity Siege",
+  "version": "0.2.0-web-trial",
+  "entry": "index.html",
+  "offline": true,
+  "standalone": true,
+  "preferredOrientation": "landscape",
+  "defaultQuality": "light",
+  "players": {
+    "minimum": 1,
+    "maximum": 2,
+    "localMultiplayer": true,
+    "multiplayerStyle": "turn-based equal shots"
+  },
+  "campaign": {
+    "levels": 6,
+    "persistentUnlocks": true,
+    "adaptiveElements": ["wind", "armor", "shotLimit", "fortLayout"]
+  },
+  "controls": {
+    "aim": ["LeftStick", "DPad", "Arrows", "WASD"],
+    "fire": ["GamepadA", "GamepadRT", "Space", "Enter", "AndroidDpadCenter"],
+    "ability": ["GamepadX", "GamepadB", "KeyE", "KeyX", "Slash"]
+  },
+  "exitContract": {
+    "androidBridge": "DTDCGameBridge.exitGame(JSON_RESULT)",
+    "postMessageType": "DTDC_GAME_EXIT",
+    "domEvent": "dtdc-game-exit"
+  }
+}

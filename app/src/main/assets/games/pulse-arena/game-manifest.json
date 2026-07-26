@@ -1,0 +1,25 @@
+{
+  "id": "pulse-arena-core-clash",
+  "name": "Pulse Arena — Core Clash",
+  "version": "0.1.0-web-trial",
+  "entry": "index.html",
+  "offline": true,
+  "standalone": true,
+  "preferredOrientation": "landscape",
+  "defaultQuality": "light",
+  "players": {
+    "minimum": 1,
+    "maximum": 2,
+    "localMultiplayer": true,
+    "singlePlayerOpponent": "AI"
+  },
+  "controls": {
+    "player1": ["WASD", "Space:Dash", "E:Pulse", "Gamepad0"],
+    "player2": ["Arrows", "Enter:Dash", "Slash:Pulse", "Gamepad1"]
+  },
+  "exitContract": {
+    "androidBridge": "DTDCGameBridge.exitGame(JSON_RESULT)",
+    "postMessageType": "DTDC_GAME_EXIT",
+    "domEvent": "dtdc-game-exit"
+  }
+}

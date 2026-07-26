@@ -1,0 +1,52 @@
+DTDC GAMES — ربط تطبيق الشاشة
+================================
+
+Package ID:
+com.dentalchain.games
+
+Action لفتح لعبة محددة:
+com.dentalchain.games.OPEN_GAME
+
+اسم الـ Extra:
+gameId
+
+المعرّفات المتاحة:
+- neon-rush
+- orbit-smash
+- pulse-arena
+- last-line
+- puzzle-studio
+- skyline-rush
+
+كود Kotlin مقترح داخل تطبيق Display:
+
+fun openDtdcGames(context: android.content.Context, gameId: String? = null) {
+    val intent = if (gameId.isNullOrBlank()) {
+        context.packageManager.getLaunchIntentForPackage("com.dentalchain.games")
+    } else {
+        android.content.Intent("com.dentalchain.games.OPEN_GAME").apply {
+            setPackage("com.dentalchain.games")
+            putExtra("gameId", gameId)
+        }
+    }
+
+    intent?.let {
+        // عند استدعائها من Activity لا تضف FLAG_ACTIVITY_NEW_TASK.
+        // عند إغلاق اللعبة سيعود Android تلقائياً إلى شاشة Display.
+        context.startActivity(it)
+    }
+}
+
+مثال:
+openDtdcGames(this, "last-line")
+
+اختبار بواسطة ADB:
+adb shell am start -a com.dentalchain.games.OPEN_GAME \
+  -p com.dentalchain.games --es gameId last-line
+
+ملاحظات:
+- فتح التطبيق بلا gameId يعرض قائمة الألعاب الست.
+- فتحه مع gameId يدخل إلى اللعبة فوراً.
+- زر العودة داخل اللعبة أو Android Back يغلق WebView ويرجع للتطبيق السابق.
+- كل لعبة تعمل ضمن Android process منفصلة باسم :game.
+- لا توجد صلاحية إنترنت؛ جميع الملفات موجودة داخل APK.

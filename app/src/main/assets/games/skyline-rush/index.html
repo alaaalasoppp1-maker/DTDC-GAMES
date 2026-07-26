@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#172c55">
+  <title>Skyline Rush — Neon Couriers</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="app" data-state="menu" data-mode="two">
+    <canvas id="gameCanvas" tabindex="0" aria-label="لعبة مطاردة دراجات طائرة"></canvas>
+    <div class="cinematic-wash" aria-hidden="true"></div>
+
+    <header class="topbar glass">
+      <div class="brand" dir="ltr"><span class="wing-logo"><i></i><b></b></span><div><strong>SKYLINE RUSH</strong><small>NEON COURIERS • DTDC GAME 06</small></div></div>
+      <div class="top-actions"><button id="soundButton" class="icon-button" type="button">🔊</button><button id="qualityButton" class="chip-button" type="button">خفيف</button><button id="pauseButton" class="icon-button" type="button">Ⅱ</button><button id="exitButton" class="exit-button" type="button">عودة للشاشة</button></div>
+    </header>
+
+    <section class="score-bar glass" dir="ltr">
+      <div class="pilot p1-pilot"><span>PLAYER 1</span><strong id="p1Score">0</strong><small id="p1Combo">COMBO ×1</small></div>
+      <div class="mission-card"><small id="modeLabel">COURIER CAMPAIGN</small><strong id="missionLabel">ROUTE 1</strong><div class="time-track"><i id="timeFill"></i></div><em id="timerLabel">00:45</em></div>
+      <div class="pilot p2-pilot"><span id="p2Name">PLAYER 2</span><strong id="p2Score">0</strong><small id="p2Combo">COMBO ×1</small></div>
+    </section>
+
+    <aside class="player-meter p1-meter glass" dir="ltr"><header><b>P1</b><span id="p1Hull">HULL ◆◆◆</span></header><div><i id="p1Energy"></i></div><small>ENERGY • A BOOST • B PULSE</small></aside>
+    <aside class="player-meter p2-meter glass" dir="ltr"><header><b>P2</b><span id="p2Hull">HULL ◆◆◆</span></header><div><i id="p2Energy"></i></div><small>ENERGY • A BOOST • B PULSE</small></aside>
+
+    <div id="statusToast" class="status-toast glass" aria-live="polite"></div>
+    <div id="eventMessage" class="event-message" aria-live="assertive"></div>
+
+    <section id="menuPanel" class="menu-panel glass">
+      <p class="eyebrow">SPEED • DODGE • BOOST • TWO PLAYERS</p>
+      <h1>SKYLINE<br><em>RUSH</em></h1>
+      <p class="lead">حلّق بين بوابات المدينة، اجمع الطاقة، تفادَ الألغام، واستخدم النبضة لتفجير الخطر. التحكم مباشر واللعبة تبدأ فورًا.</p>
+      <p id="campaignProgress" class="campaign-progress">الحملة: الطريق 1 من 6</p>
+      <div class="rules" dir="ltr"><span><b>STICK</b> MOVE</span><span><b>A</b> BOOST</span><span><b>B</b> PULSE</span></div>
+      <div class="mode-buttons"><button id="onePlayerButton" class="mode-button" type="button"><strong>حملة لاعب واحد</strong><small>6 طرق، عواصف وسرعة متصاعدة</small></button><button id="twoPlayerButton" class="mode-button primary-mode" type="button"><strong>سباق لاعبين</strong><small>منافسة مباشرة لمدة 75 ثانية</small></button></div>
+      <div class="controller-row"><div id="controllerOne" class="controller-pill"><i></i><span>P1 بانتظار القبضة</span></div><div id="controllerTwo" class="controller-pill"><i></i><span>P2 اضغط A للدخول</span></div></div>
+    </section>
+
+    <section id="pausePanel" class="center-panel glass" hidden><p class="eyebrow">CHASE PAUSED</p><h2>المطاردة متوقفة</h2><p>اضغط Start أو اختر متابعة.</p><div class="panel-actions"><button id="resumeButton" class="action-button" type="button">متابعة</button><button id="restartButton" class="secondary-button" type="button">إعادة الطريق</button></div></section>
+    <section id="resultPanel" class="center-panel result-panel glass" hidden><p class="eyebrow">ROUTE REPORT</p><h2 id="resultTitle">انتهت المطاردة</h2><div class="final-score" dir="ltr"><strong id="finalP1Score">0</strong><span>—</span><strong id="finalP2Score">0</strong></div><p id="resultDetail">تقرير الرحلة</p><div class="panel-actions"><button id="playAgainButton" class="action-button" type="button">الطريق التالي</button><button id="resultExitButton" class="secondary-button" type="button">عودة للشاشة</button></div></section>
+
+    <nav class="touch-pad p1-touch" aria-label="تحكم اللاعب الأول"><button id="p1Up" type="button">▲</button><button id="p1Down" type="button">▼</button><button id="p1Boost" class="boost-touch" type="button">P1 BOOST</button><button id="p1Pulse" class="pulse-touch" type="button">PULSE</button></nav>
+    <nav class="touch-pad p2-touch" aria-label="تحكم اللاعب الثاني"><button id="p2Up" type="button">▲</button><button id="p2Down" type="button">▼</button><button id="p2Boost" class="boost-touch" type="button">P2 BOOST</button><button id="p2Pulse" class="pulse-touch" type="button">PULSE</button></nav>
+    <footer class="controls-help glass" dir="ltr"><span>P1 ARROWS • SPACE BOOST • SHIFT PULSE</span><span>P2 WASD • F BOOST • G PULSE</span><span>GAMEPAD A BOOST • B/X PULSE</span><span>START / ESC PAUSE</span></footer>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>

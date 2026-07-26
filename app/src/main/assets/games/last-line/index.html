@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#071a2d">
+  <title>Last Line — Coastal Defense</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="app" data-state="menu" data-mode="two">
+    <canvas id="gameCanvas" aria-label="لعبة دفاع ساحلي ثلاثية الأبعاد"></canvas>
+    <div class="screen-vignette" aria-hidden="true"></div>
+
+    <header class="topbar glass">
+      <div class="brand" dir="ltr"><span class="radar-logo"><i></i></span><div><strong>LAST LINE</strong><small>COASTAL DEFENSE • DTDC GAME 04</small></div></div>
+      <div class="top-actions">
+        <button id="soundButton" class="icon-button" type="button">🔊</button>
+        <button id="qualityButton" class="chip-button" type="button">خفيف</button>
+        <button id="pauseButton" class="icon-button" type="button">Ⅱ</button>
+        <button id="exitButton" class="exit-button" type="button">عودة للشاشة</button>
+      </div>
+    </header>
+
+    <section class="mission-bar glass" dir="ltr">
+      <div class="player-stat p1"><span>PLAYER 1</span><strong id="p1Score">0</strong><small id="p1Combo">COMBO ×1</small></div>
+      <div class="mission-center"><small id="modeLabel">COASTAL DEFENSE</small><strong id="waveLabel">WAVE 1</strong><div class="base-health"><i id="baseHealthFill"></i></div><em id="baseHealthText">BASE 100%</em></div>
+      <div class="player-stat p2"><span id="p2Name">PLAYER 2</span><strong id="p2Score">0</strong><small id="p2Combo">COMBO ×1</small></div>
+    </section>
+
+    <aside class="weapon-panel p1-panel glass" dir="ltr"><b>P1</b><div><span>HEAT</span><i><em id="p1HeatFill"></em></i></div><strong id="p1Missiles">MISSILES ×3</strong></aside>
+    <aside class="weapon-panel p2-panel glass" dir="ltr"><b>P2</b><div><span>HEAT</span><i><em id="p2HeatFill"></em></i></div><strong id="p2Missiles">MISSILES ×3</strong></aside>
+
+    <div id="p1Reticle" class="reticle p1-reticle" aria-hidden="true"><i></i></div>
+    <div id="p2Reticle" class="reticle p2-reticle" aria-hidden="true"><i></i></div>
+    <div id="statusToast" class="status-toast glass" aria-live="polite"></div>
+    <div id="waveMessage" class="wave-message" aria-live="assertive"></div>
+
+    <section id="menuPanel" class="menu-panel glass">
+      <p class="eyebrow">TURRET DEFENSE • WAVES • LOCAL CO-OP</p>
+      <h1>LAST<br><em>LINE</em></h1>
+      <p class="lead">احمِ القاعدة الساحلية من الزوارق والطائرات المسيّرة والناقلات المدرعة. صوب بسرعة، راقب حرارة المدفع، واستخدم الصاروخ عند ازدحام السماء.</p>
+      <div class="feature-row"><span>موجات أصعب تدريجياً</span><span>زعماء مدرّعون</span><span>لعب تعاوني محلي</span></div>
+      <div class="mode-buttons">
+        <button id="onePlayerButton" class="mode-button" type="button"><strong>لاعب واحد</strong><small>دافع منفرداً وسجّل أفضل نتيجة</small></button>
+        <button id="twoPlayerButton" class="mode-button primary-mode" type="button"><strong>لاعبان تعاوني</strong><small>مدفعان وقبضتان في نفس المعركة</small></button>
+      </div>
+      <div class="controller-row"><div id="controllerOne" class="controller-pill"><i></i><span>P1 بانتظار القبضة</span></div><div id="controllerTwo" class="controller-pill"><i></i><span>P2 اضغط A للدخول</span></div></div>
+    </section>
+
+    <section id="pausePanel" class="center-panel glass" hidden>
+      <p class="eyebrow">MISSION PAUSED</p><h2>المعركة متوقفة</h2><p>اضغط Start أو اختر متابعة.</p>
+      <div class="panel-actions"><button id="resumeButton" class="action-button" type="button">متابعة</button><button id="restartButton" class="secondary-button" type="button">إعادة المهمة</button></div>
+    </section>
+
+    <section id="resultPanel" class="center-panel result-panel glass" hidden>
+      <p class="eyebrow">MISSION REPORT</p><h2 id="resultTitle">سقط خط الدفاع</h2>
+      <div class="final-score" dir="ltr"><strong id="finalP1Score">0</strong><span>+</span><strong id="finalP2Score">0</strong></div>
+      <p id="resultDetail">وصلتم إلى الموجة 1</p>
+      <div class="panel-actions"><button id="playAgainButton" class="action-button" type="button">إعادة المحاولة</button><button id="resultExitButton" class="secondary-button" type="button">عودة للشاشة</button></div>
+    </section>
+
+    <nav class="touch-controls" aria-label="تحكم اللمس"><button id="touchMissile" class="missile-touch" type="button">MISSILE</button><button id="touchFire" class="fire-touch" type="button">FIRE</button></nav>
+
+    <footer class="controls-help glass" dir="ltr"><span>STICKS / ARROWS + WASD: AIM</span><span>A / RT / SPACE + F: FIRE</span><span>X / B / E + SHIFT: MISSILE</span><span>START / ESC: PAUSE</span></footer>
+    <div id="fatalPanel" class="fatal-panel" hidden><strong>تعذّر تشغيل العرض ثلاثي الأبعاد</strong><p>تأكد أن WebGL وتسريع الرسوميات مفعّلان.</p></div>
+  </main>
+  <script src="three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

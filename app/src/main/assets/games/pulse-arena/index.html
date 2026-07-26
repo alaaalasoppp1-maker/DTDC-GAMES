@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#071426">
+  <title>Pulse Arena — Core Clash</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="app" data-state="menu" data-mode="two">
+    <canvas id="gameCanvas" aria-label="لعبة تنافس ثلاثية الأبعاد"></canvas>
+    <div class="vignette" aria-hidden="true"></div>
+
+    <header class="topbar glass">
+      <div class="brand" dir="ltr">
+        <span class="brand-icon"><i></i></span>
+        <div><strong>PULSE ARENA</strong><small>CORE CLASH • DTDC GAME 02</small></div>
+      </div>
+      <div class="top-actions">
+        <button id="soundButton" class="icon-button" type="button" title="الصوت (M)">🔊</button>
+        <button id="qualityButton" class="chip-button" type="button">خفيف</button>
+        <button id="pauseButton" class="icon-button" type="button" title="إيقاف مؤقت">Ⅱ</button>
+        <button id="exitButton" class="exit-button" type="button">عودة للشاشة</button>
+      </div>
+    </header>
+
+    <section class="scoreboard glass" dir="ltr" aria-label="النتيجة">
+      <div class="player-score cyan-score"><span>PLAYER 1</span><strong id="playerOneScore">0</strong></div>
+      <div class="match-clock"><small id="matchState">CORE CLASH</small><strong id="timeValue">02:00</strong><i id="suddenDeathLabel">SUDDEN DEATH</i></div>
+      <div class="player-score pink-score"><span id="playerTwoName">PLAYER 2</span><strong id="playerTwoScore">0</strong></div>
+    </section>
+
+    <section class="player-hud player-one-hud glass" dir="ltr">
+      <div class="player-dot cyan"></div>
+      <div class="ability"><span>DASH</span><div><i id="p1DashFill"></i></div></div>
+      <div class="ability"><span>PULSE</span><div><i id="p1PulseFill"></i></div></div>
+      <b id="p1Shield">NO SHIELD</b>
+    </section>
+
+    <section class="player-hud player-two-hud glass" dir="ltr">
+      <div class="player-dot pink"></div>
+      <div class="ability"><span>DASH</span><div><i id="p2DashFill"></i></div></div>
+      <div class="ability"><span>PULSE</span><div><i id="p2PulseFill"></i></div></div>
+      <b id="p2Shield">NO SHIELD</b>
+    </section>
+
+    <div id="roundMessage" class="round-message" aria-live="assertive"></div>
+    <div id="statusToast" class="status-toast glass" aria-live="polite"></div>
+
+    <section id="menuPanel" class="menu-panel glass">
+      <p class="eyebrow">FAST LOCAL COMPETITION</p>
+      <h1>PULSE<br><em>ARENA</em></h1>
+      <p class="lead">اخطف نواة الطاقة، احملها إلى بوابة خصمك، واستعمل الاندفاع والنبضة لإسقاطها منه.</p>
+      <div class="rules">
+        <span>أول لاعب يصل إلى 5</span>
+        <span>مباراة دقيقتين</span>
+        <span>تعادل = هدف ذهبي</span>
+      </div>
+
+      <div class="mode-buttons">
+        <button id="onePlayerButton" class="mode-button" type="button"><strong>لاعب واحد</strong><small>ضد ذكاء اصطناعي</small></button>
+        <button id="twoPlayerButton" class="mode-button primary-mode" type="button"><strong>لاعبان</strong><small>قبضتان أو كيبورد</small></button>
+      </div>
+
+      <div class="controller-row">
+        <div id="controllerOne" class="controller-pill"><i></i><span>P1 بانتظار القبضة</span></div>
+        <div id="controllerTwo" class="controller-pill"><i></i><span>P2 بانتظار القبضة</span></div>
+      </div>
+    </section>
+
+    <section id="pausePanel" class="center-panel glass" hidden>
+      <p class="eyebrow">PAUSED</p>
+      <h2>المباراة متوقفة</h2>
+      <p>اضغط Start أو اختر متابعة.</p>
+      <div class="panel-actions">
+        <button id="resumeButton" class="action-button" type="button">متابعة</button>
+        <button id="restartButton" class="secondary-button" type="button">إعادة المباراة</button>
+      </div>
+    </section>
+
+    <section id="resultPanel" class="center-panel result-panel glass" hidden>
+      <p class="eyebrow">MATCH COMPLETE</p>
+      <h2 id="winnerTitle">فاز اللاعب الأول!</h2>
+      <div class="final-score" dir="ltr"><strong id="finalP1Score">0</strong><span>—</span><strong id="finalP2Score">0</strong></div>
+      <p id="resultDetail">مباراة قوية</p>
+      <div class="panel-actions">
+        <button id="playAgainButton" class="action-button" type="button">مباراة جديدة</button>
+        <button id="resultExitButton" class="secondary-button" type="button">عودة للشاشة</button>
+      </div>
+    </section>
+
+    <nav class="touch-controls" aria-label="تحكم اللاعب الأول باللمس">
+      <div class="touch-dpad">
+        <button id="touchUp" type="button">▲</button>
+        <button id="touchLeft" type="button">◀</button>
+        <button id="touchDown" type="button">▼</button>
+        <button id="touchRight" type="button">▶</button>
+      </div>
+      <div class="touch-actions">
+        <button id="touchPulse" class="pulse-touch" type="button">PULSE</button>
+        <button id="touchDash" class="dash-touch" type="button">DASH</button>
+      </div>
+    </nav>
+
+    <footer class="controls-help glass" dir="ltr">
+      <span>P1: WASD • SPACE DASH • E PULSE</span>
+      <span>P2: ARROWS • ENTER DASH • / PULSE</span>
+      <span>GAMEPAD: STICK • A/RT DASH • X/B PULSE</span>
+    </footer>
+
+    <div id="fatalPanel" class="fatal-panel" hidden>
+      <strong>تعذّر تشغيل العرض ثلاثي الأبعاد</strong>
+      <p>تأكد أن WebGL وتسريع الرسوميات مفعّلان.</p>
+    </div>
+  </main>
+
+  <script src="three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

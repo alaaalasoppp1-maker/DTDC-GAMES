@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#050b14">
+  <title>Neon Rush Evolution — Offline</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" class="app" data-state="menu">
+    <canvas id="gameCanvas" aria-label="لعبة سباق ثلاثية الأبعاد"></canvas>
+
+    <div class="ambient" aria-hidden="true"></div>
+
+    <header class="topbar glass">
+      <div class="brand" dir="ltr">
+        <span class="brand-mark"></span>
+        <div>
+          <strong>NEON RUSH</strong>
+          <small>EVOLUTION • OFFLINE</small>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <button id="soundButton" class="icon-button" type="button" aria-label="الصوت" title="الصوت (M)">🔊</button>
+        <button id="qualityButton" class="chip-button" type="button" title="جودة العرض">خفيف</button>
+        <button id="cameraButton" class="icon-button" type="button" aria-label="تبديل الكاميرا" title="الكاميرا (C)">◉</button>
+        <button id="pauseButton" class="icon-button" type="button" aria-label="إيقاف مؤقت" title="إيقاف مؤقت (Esc)">Ⅱ</button>
+        <button id="exitButton" class="exit-button" type="button">عودة للشاشة</button>
+      </div>
+    </header>
+
+    <section class="hud" aria-label="معلومات السباق">
+      <div class="hud-group hud-primary glass">
+        <div class="timer-block">
+          <span>الوقت</span>
+          <strong id="timeValue">75</strong>
+        </div>
+        <div class="score-block">
+          <span>النقاط</span>
+          <strong id="scoreValue">0</strong>
+        </div>
+        <div class="best-block">
+          <span>الأفضل</span>
+          <strong id="bestValue">0</strong>
+        </div>
+      </div>
+
+      <div class="hud-group speed-card glass" dir="ltr">
+        <div class="speed-number"><strong id="speedValue">0</strong><small>KM/H</small></div>
+        <div class="gear"><span>GEAR</span><strong id="gearValue">N</strong></div>
+      </div>
+    </section>
+
+    <aside class="meters glass" aria-label="الطاقة والحماية">
+      <div class="meter-row">
+        <span class="meter-label">NITRO</span>
+        <div class="meter-track"><i id="nitroFill"></i></div>
+        <b id="nitroValue">100</b>
+      </div>
+      <div id="shieldRow" class="meter-row shield-row is-empty">
+        <span class="meter-label">SHIELD</span>
+        <div class="meter-track"><i id="shieldFill"></i></div>
+        <b id="shieldValue">—</b>
+      </div>
+    </aside>
+
+    <div id="comboBadge" class="combo-badge" aria-live="polite">
+      <small>NEAR MISS</small>
+      <strong id="comboValue">×2</strong>
+    </div>
+
+    <div id="statusToast" class="status-toast glass" role="status" aria-live="polite"></div>
+
+    <section id="menuPanel" class="overlay-panel menu-panel glass">
+      <p class="eyebrow">DTDC GAME LAB • GAME 01</p>
+      <h1>NEON RUSH<br><em>EVOLUTION</em></h1>
+      <p class="lead">سباق ليلي سريع بمنظور ثلاثي الأبعاد، مصمم ليعمل أوفلاين ويدعم القبضة والكيبورد واللمس.</p>
+
+      <div class="feature-row">
+        <span>3 كاميرات</span>
+        <span>نيترو ودرع</span>
+        <span>بوابات وCombo</span>
+      </div>
+
+      <button id="startButton" class="start-button" type="button">
+        <span>ابدأ السباق</span>
+        <small>ENTER / A</small>
+      </button>
+
+      <div id="controllerState" class="controller-state">
+        <i></i><span>يمكنك توصيل قبضة اللعب الآن</span>
+      </div>
+    </section>
+
+    <section id="pausePanel" class="overlay-panel compact-panel glass" hidden>
+      <p class="eyebrow">PAUSED</p>
+      <h2>السباق متوقف</h2>
+      <p>اضغط متابعة أو زر Start في القبضة.</p>
+      <div class="panel-actions">
+        <button id="resumeButton" class="start-button" type="button">متابعة</button>
+        <button id="restartButton" class="secondary-button" type="button">إعادة السباق</button>
+      </div>
+    </section>
+
+    <section id="resultPanel" class="overlay-panel result-panel glass" hidden>
+      <p class="eyebrow">RACE COMPLETE</p>
+      <h2>انتهى التحدي</h2>
+      <div class="result-score"><span>نتيجتك</span><strong id="finalScoreValue">0</strong></div>
+      <div class="result-grid">
+        <div><span>المسافة</span><strong id="finalDistanceValue">0 م</strong></div>
+        <div><span>تفادي قريب</span><strong id="nearMissValue">0</strong></div>
+        <div><span>أفضل كومبو</span><strong id="bestComboValue">×1</strong></div>
+      </div>
+      <div class="panel-actions">
+        <button id="playAgainButton" class="start-button" type="button">سباق جديد</button>
+        <button id="resultExitButton" class="secondary-button" type="button">عودة للشاشة</button>
+      </div>
+    </section>
+
+    <nav class="touch-controls" aria-label="أزرار اللمس">
+      <div class="steering-controls">
+        <button id="leftButton" class="touch-button steer-button" type="button" aria-label="يسار">‹</button>
+        <button id="rightButton" class="touch-button steer-button" type="button" aria-label="يمين">›</button>
+      </div>
+      <button id="boostButton" class="touch-button boost-button" type="button"><span>NITRO</span><small>اضغط باستمرار</small></button>
+    </nav>
+
+    <footer class="controls-help glass" dir="ltr">
+      <span>← → / LEFT STICK</span>
+      <span>SPACE / X / RT — NITRO</span>
+      <span>C / Y — CAMERA</span>
+      <span>ESC / START — PAUSE</span>
+    </footer>
+
+    <div id="fatalPanel" class="fatal-panel" hidden>
+      <strong>تعذّر تشغيل العرض ثلاثي الأبعاد</strong>
+      <p>تأكد أن تسريع الرسوميات WebGL مفعّل في المتصفح.</p>
+    </div>
+  </main>
+
+  <script src="three.min.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

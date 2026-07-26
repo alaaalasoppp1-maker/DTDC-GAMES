@@ -1,0 +1,22 @@
+{
+  "id": "neon-rush-evolution",
+  "name": "Neon Rush Evolution",
+  "version": "0.3.0-web-trial",
+  "entry": "index.html",
+  "offline": true,
+  "standalone": true,
+  "preferredOrientation": "landscape",
+  "defaultQuality": "light",
+  "controls": {
+    "steer": ["ArrowLeft", "ArrowRight", "KeyA", "KeyD", "GamepadAxis0", "GamepadDPad"],
+    "nitro": ["Space", "KeyX", "GamepadA", "GamepadX", "GamepadRT"],
+    "camera": ["KeyC", "GamepadY"],
+    "pause": ["Escape", "GamepadStart"],
+    "exit": ["GamepadB", "DTDCGameBridge.exitGame", "DTDC_GAME_EXIT"]
+  },
+  "exitContract": {
+    "androidBridge": "DTDCGameBridge.exitGame(JSON_RESULT)",
+    "postMessageType": "DTDC_GAME_EXIT",
+    "domEvent": "dtdc-game-exit"
+  }
+}

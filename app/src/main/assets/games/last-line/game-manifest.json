@@ -1,0 +1,19 @@
+{
+  "id": "last-line-coastal-defense",
+  "name": "Last Line — Coastal Defense",
+  "version": "0.4.0-web-trial",
+  "entry": "index.html",
+  "offline": true,
+  "standalone": true,
+  "preferredOrientation": "landscape",
+  "defaultQuality": "light",
+  "players": { "minimum": 1, "maximum": 2, "localMultiplayer": true, "multiplayerStyle": "shared-screen cooperative" },
+  "progression": { "waves": "endless", "bossEvery": 5, "difficultyScaling": true },
+  "graphics": { "paintedCoast": true, "clearForeground": true, "detailedEnemies": true, "cameraFeedback": true, "qualityModes": ["light", "high"] },
+  "controls": {
+    "aim": ["GamepadLeftStick", "GamepadDPad", "Arrows", "WASD", "Pointer"],
+    "fire": ["GamepadA", "GamepadRT", "Space", "Enter", "KeyF", "AndroidDpadCenter"],
+    "missile": ["GamepadX", "GamepadB", "KeyE", "Shift"]
+  },
+  "exitContract": { "androidBridge": "DTDCGameBridge.exitGame(JSON_RESULT)", "postMessageType": "DTDC_GAME_EXIT", "domEvent": "dtdc-game-exit" }
+}
